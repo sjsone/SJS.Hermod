@@ -15,7 +15,7 @@ class LokiBackend extends AbstractBackend
     protected array $streamBuffer = [];
     protected ?array $labels;
 
-    protected int $flushStreamBufferOnSize = 150;
+    protected int $maxBufferSize = 150;
 
     protected array $severityLabels = [
         LOG_EMERG => 'EMERGENCY',
@@ -40,6 +40,10 @@ class LokiBackend extends AbstractBackend
         $this->url = $options['url'];
         $this->user = $options['user'];
         $this->token = $options['token'];
+
+        if (isset($options['maxBufferSize'])) {
+            $this->maxBufferSize = $options['maxBufferSize'];
+        }
 
         if (isset($options['logIpAddress'])) {
             $this->logIpAddress = $options['logIpAddress'];
@@ -100,7 +104,7 @@ class LokiBackend extends AbstractBackend
 
         $this->streamBuffer[] = $stream;
 
-        if (count($this->streamBuffer) > $this->flushStreamBufferOnSize) {
+        if (count($this->streamBuffer) >= $this->maxBufferSize) {
             $this->flushAndSendStreamBuffer();
         }
     }
