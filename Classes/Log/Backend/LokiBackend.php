@@ -9,12 +9,11 @@ use GuzzleHttp;
 class LokiBackend extends AbstractBackend
 {
     protected GuzzleHttp\Client $client;
-
-    protected string $loggerName;
     protected string $url;
     protected string $user;
     protected string $token;
     protected array $streamBuffer = [];
+    protected ?array $labels;
 
     protected int $flushStreamBufferOnSize = 150;
 
@@ -38,7 +37,6 @@ class LokiBackend extends AbstractBackend
     public function __construct(array $options = [])
     {
         $this->severityThreshold = $options['severityThreshold'];
-        $this->loggerName = $options['loggerName'];
         $this->url = $options['url'];
         $this->user = $options['user'];
         $this->token = $options['token'];
@@ -47,6 +45,16 @@ class LokiBackend extends AbstractBackend
             $this->logIpAddress = $options['logIpAddress'];
         } else {
             $this->logIpAddress = false;
+        }
+
+        if (isset($options['labels'])) {
+            if (!is_array($options['labels'])) {
+                throw new \Exception("LokiBackend: if labels are set, they MUST be an array");
+            }
+            if (!empty($options['labels']) && array_is_list($options['labels'])) {
+                throw new \Exception("LokiBackend: labels MUST be an associative array");
+            }
+            $this->labels = $options['labels'];
         }
     }
 
@@ -65,10 +73,8 @@ class LokiBackend extends AbstractBackend
     {
         $severityLabel = $this->severityLabels[$severity] ?? 'UNKNOWN  ';
 
-        $labels = [
-            "target" => $this->loggerName,
-            "severity" => $severity
-        ];
+        $labels = $this->labels ?? [];
+        $labels["severity"] = $severity;
 
         if ($packageKey) {
             $labels['packageKey'] = $packageKey;
