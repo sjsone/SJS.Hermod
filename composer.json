@@ -1,0 +1,19 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "sjs/loki",
+    "require": {
+        "neos/flow": "^8.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SJS\\Loki\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "SJS.Loki"
+        }
+    }
+}

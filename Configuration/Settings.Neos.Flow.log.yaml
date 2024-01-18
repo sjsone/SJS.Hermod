@@ -1,0 +1,44 @@
+Neos:
+  Flow:
+    log:
+      psr3:
+        'Neos\Flow\Log\PsrLoggerFactory':
+          systemLogger:
+            default:
+              class: SJS\Loki\Log\Backend\LokiBackend
+              options:
+                severityThreshold: "%LOG_DEBUG%"
+                loggerName: systemLogger
+                url: "%env:LOKI_URI%"
+                user: "%env:LOKI_USER%"
+                token: "%env:LOKI_TOKEN%"
+
+          securityLogger:
+            default:
+              class: SJS\Loki\Log\Backend\LokiBackend
+              options:
+                severityThreshold: "%LOG_DEBUG%"
+                loggerName: securityLogger
+                url: "%env:LOKI_URI%"
+                user: "%env:LOKI_USER%"
+                token: "%env:LOKI_TOKEN%"
+
+          sqlLogger:
+            default:
+              class: SJS\Loki\Log\Backend\LokiBackend
+              options:
+                severityThreshold: "%LOG_INFO%"
+                loggerName: sqlLogger
+                url: "%env:LOKI_URI%"
+                user: "%env:LOKI_USER%"
+                token: "%env:LOKI_TOKEN%"
+
+          i18nLogger:
+            default:
+              class: SJS\Loki\Log\Backend\LokiBackend
+              options:
+                severityThreshold: "%LOG_INFO%"
+                loggerName: i18nLogger
+                url: "%env:LOKI_URI%"
+                user: "%env:LOKI_USER%"
+                token: "%env:LOKI_TOKEN%"
