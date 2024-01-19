@@ -4,11 +4,12 @@ declare(strict_types=1);
 namespace SJS\Loki\Log\Backend;
 
 use Neos\Flow\Log\Backend\AbstractBackend;
-use GuzzleHttp;
+use SJS\Loki\Client\LokiClient;
+use SJS\Loki\Client\LokiClientConfiguration;
 
 class LokiBackend extends AbstractBackend
 {
-    protected GuzzleHttp\Client $client;
+    protected LokiClient $client;
     protected string $url;
     protected string $user;
     protected string $token;
@@ -37,9 +38,6 @@ class LokiBackend extends AbstractBackend
     public function __construct(array $options = [])
     {
         $this->severityThreshold = $options['severityThreshold'];
-        $this->url = $options['url'];
-        $this->user = $options['user'];
-        $this->token = $options['token'];
 
         if (isset($options['maxBufferSize'])) {
             $this->maxBufferSize = $options['maxBufferSize'];
@@ -51,34 +49,30 @@ class LokiBackend extends AbstractBackend
             $this->logIpAddress = false;
         }
 
-        if (isset($options['labels'])) {
-            if (!is_array($options['labels'])) {
-                throw new \Exception("LokiBackend: if labels are set, they MUST be an array");
-            }
-            if (!empty($options['labels']) && array_is_list($options['labels'])) {
-                throw new \Exception("LokiBackend: labels MUST be an associative array");
-            }
-            $this->labels = $options['labels'];
+        if (isset($options['labels']) && !is_array($options['labels'])) {
+            throw new \Exception("LokiBackend: if labels are set, they MUST be an array");
         }
+
+        $lokiClientConfiguration = new LokiClientConfiguration(
+            $options['user'],
+            $options['token'],
+            $options['url'],
+            $options['labels'] ?? []
+        );
+
+        $this->client = new LokiClient($lokiClientConfiguration);
     }
 
     public function open(): void
     {
-        $this->client = new GuzzleHttp\Client([
-            GuzzleHttp\RequestOptions::AUTH => [
-                $this->user,
-                $this->token
-            ],
-            GuzzleHttp\RequestOptions::TIMEOUT => 0.5
-        ]);
+        // stub
     }
 
     public function append(string $message, int $severity = LOG_INFO, $additionalData = null, string $packageKey = null, string $className = null, string $methodName = null): void
     {
-        $severityLabel = $this->severityLabels[$severity] ?? 'UNKNOWN  ';
-
-        $labels = $this->labels ?? [];
-        $labels["severity"] = $severity;
+        $labels = [
+            "severity" => $severity
+        ];
 
         if ($packageKey) {
             $labels['packageKey'] = $packageKey;
@@ -91,16 +85,16 @@ class LokiBackend extends AbstractBackend
         }
 
         $ipAddress = ($this->logIpAddress === true) ? str_pad(($_SERVER['REMOTE_ADDR'] ?? ''), 15) . ' ' : '';
+        $severityLabel = $this->severityLabels[$severity] ?? 'UNKNOWN  ';
 
-        $stream = [
-            "stream" => $labels,
-            "values" => [
-                [
-                    floor(microtime(true) * 1000) . "000000",
-                    $ipAddress . $severityLabel . " " . $message . ($additionalData ? json_encode($additionalData) : "")
-                ]
+        $values = [
+            [
+                floor(microtime(true) * 1000) . "000000",
+                $ipAddress . $severityLabel . " " . $message . ($additionalData ? json_encode($additionalData) : "")
             ]
         ];
+
+        $stream = $this->client->buildStream($values, $labels);
 
         $this->streamBuffer[] = $stream;
 
@@ -118,18 +112,10 @@ class LokiBackend extends AbstractBackend
 
     protected function flushAndSendStreamBuffer()
     {
-        $body = [
-            "streams" => $this->streamBuffer
-        ];
+        $streams = $this->streamBuffer;
 
         $this->streamBuffer = [];
 
-        try {
-            $this->client->post($this->url, [
-                GuzzleHttp\RequestOptions::JSON => $body
-            ]);
-        } catch (\Throwable $th) {
-            // TODO: in case of error do not try any again and log streams to file instead
-        }
+        $this->client->send($streams);
     }
 }
