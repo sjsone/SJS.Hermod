@@ -54,11 +54,9 @@ Neos:
 
 **Debug Class**: `SJS\Loki\Handler\DebugExceptionHandler`
 
+### Options
 
-
-### Options 
-
-The exception handling is split into two parts. The Exception Handler uses the Exception Service to send the data to Loki. 
+The exception handling is split into two parts. The Exception Handler uses the Exception Service to send the data to Loki.
 
 #### Exception Service
 
@@ -90,8 +88,6 @@ SJS:
         target: exception
 ```
 
-
-
 *`Configuration/Settings.Neos.Flow.yaml`*
 
 ```yaml
@@ -117,8 +113,5 @@ Neos:
 
 ```
 
-
-
-
-
+> [!NOTE]
 > The exception handling is based on [Networkteam.SentryClient](https://github.com/networkteam/Networkteam.SentryClient)
