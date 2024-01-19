@@ -27,6 +27,9 @@ class LokiClient
 
         if ($withLabels) {
             foreach ($withLabels as $label => $value) {
+                if (!is_string($value) && !is_numeric($value)) {
+                    throw new \Exception("LokiClient: could not build stream due to value of '$label'");
+                }
                 $labels[$label] = $value;
             }
         }
@@ -37,7 +40,7 @@ class LokiClient
         ];
     }
 
-    public function send(array $streams)
+    public function send(array $streams, $debug = false)
     {
         $body = [
             "streams" => $streams

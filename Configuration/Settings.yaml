@@ -1,2 +1,8 @@
 SJS:
   Loki:
+    exceptionService:
+      url: "%env:LOKI_URI%"
+      user: "%env:LOKI_USER%"
+      token: "%env:LOKI_TOKEN%"
+      labels:
+        target: exception

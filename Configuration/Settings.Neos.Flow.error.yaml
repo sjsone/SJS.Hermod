@@ -1,0 +1,19 @@
+Neos:
+  Flow:
+    error:
+      exceptionHandler:
+        className: SJS\Loki\Handler\ProductionExceptionHandler
+
+        defaultRenderingOptions:
+          lokiIgnoreException: false
+
+        renderingGroups:
+          authenticationRequiredExceptions:
+            matchingStatusCodes: [401]
+            options:
+              lokiIgnoreException: true
+
+          accessDeniedExceptions:
+            matchingStatusCodes: [403]
+            options:
+              lokiIgnoreException: true
