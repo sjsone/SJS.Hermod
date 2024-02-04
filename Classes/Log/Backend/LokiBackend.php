@@ -57,7 +57,8 @@ class LokiBackend extends AbstractBackend
             $options['user'],
             $options['token'],
             $options['url'],
-            $options['labels'] ?? []
+            $options['labels'] ?? [],
+            $options['async'] ?? false
         );
 
         $this->client = new LokiClient($lokiClientConfiguration);
