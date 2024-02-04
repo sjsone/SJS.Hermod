@@ -21,6 +21,8 @@ class LokiExceptionService
             $this->configuration['user'],
             $this->configuration['token'],
             $this->configuration['url'],
+            $this->configuration['connectTimeout'],
+            $this->configuration['readTimeout'],
             $this->configuration['labels'],
         );
 

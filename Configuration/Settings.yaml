@@ -4,5 +4,8 @@ SJS:
       url: "%env:LOKI_URI%"
       user: "%env:LOKI_USER%"
       token: "%env:LOKI_TOKEN%"
+      maxBufferSize: 150
+      connectTimeout: 0.2
+      readTimeout: 0.2
       labels:
         target: exception

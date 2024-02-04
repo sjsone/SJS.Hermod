@@ -17,7 +17,8 @@ class LokiClient
                 $this->configuration->user,
                 $this->configuration->token
             ],
-            GuzzleHttp\RequestOptions::TIMEOUT => 0.5
+            GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => $configuration->connectTimeout,
+            GuzzleHttp\RequestOptions::READ_TIMEOUT => $configuration->readTimeout,
         ]);
     }
 
@@ -40,7 +41,7 @@ class LokiClient
         ];
     }
 
-    public function send(array $streams, $debug = false)
+    public function send(array $streams)
     {
         $body = [
             "streams" => $streams

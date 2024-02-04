@@ -12,7 +12,8 @@ Neos:
                 user: "%env:LOKI_USER%"
                 token: "%env:LOKI_TOKEN%"
                 maxBufferSize: 150
-                async: true
+                connectTimeout: 0.2
+                readTimeout: 0.2
                 labels:
                   target: systemLogger
           securityLogger:
@@ -23,28 +24,34 @@ Neos:
                 url: "%env:LOKI_URI%"
                 user: "%env:LOKI_USER%"
                 token: "%env:LOKI_TOKEN%"
-                maxBufferSize: 1
-                async: true
+                maxBufferSize: 150
+                connectTimeout: 0.2
+                readTimeout: 0.2
                 labels:
                   target: securityLogger
-#         sqlLogger:
-#           default:
-#             class: SJS\Loki\Log\Backend\LokiBackend
-#             options:
-#               severityThreshold: "%LOG_INFO%"
-#               url: "%env:LOKI_URI%"
-#               user: "%env:LOKI_USER%"
-#               token: "%env:LOKI_TOKEN%"
-#               labels:
-#                 target: sqlLogger
-
-#         i18nLogger:
-#           default:
-#             class: SJS\Loki\Log\Backend\LokiBackend
-#             options:
-#               severityThreshold: "%LOG_INFO%"
-#               url: "%env:LOKI_URI%"
-#               user: "%env:LOKI_USER%"
-#               token: "%env:LOKI_TOKEN%"
-#               labels:
-#                 target: i18nLogger
+        # sqlLogger:
+        #   default:
+        #     class: SJS\Loki\Log\Backend\LokiBackend
+        #     options:
+        #       severityThreshold: "%LOG_INFO%"
+        #       url: "%env:LOKI_URI%"
+        #       user: "%env:LOKI_USER%"
+        #       token: "%env:LOKI_TOKEN%"
+        #       maxBufferSize: 150
+        #       connectTimeout: 0.1
+        #       readTimeout: 0.1
+        #       labels:
+        #         target: sqlLogger
+        # i18nLogger:
+        #   default:
+        #     class: SJS\Loki\Log\Backend\LokiBackend
+        #     options:
+        #       severityThreshold: "%LOG_INFO%"
+        #       url: "%env:LOKI_URI%"
+        #       user: "%env:LOKI_USER%"
+        #       token: "%env:LOKI_TOKEN%"
+        #       maxBufferSize: 150
+        #       connectTimeout: 0.1
+        #       readTimeout: 0.1
+        #       labels:
+        #         target: i18nLogger

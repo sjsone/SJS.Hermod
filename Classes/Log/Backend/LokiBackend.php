@@ -29,6 +29,8 @@ class LokiBackend extends AbstractBackend
         LOG_DEBUG => 'DEBUG    ',
     ];
 
+    protected bool $closed = false;
+
     /**
      * Constructs this log backend
      *
@@ -57,8 +59,9 @@ class LokiBackend extends AbstractBackend
             $options['user'],
             $options['token'],
             $options['url'],
-            $options['labels'] ?? [],
-            $options['async'] ?? false
+            $options['connectTimeout'] ?? [],
+            $options['readTimeout'] ?? [],
+            $options['labels'] ?? []
         );
 
         $this->client = new LokiClient($lokiClientConfiguration);
@@ -104,19 +107,33 @@ class LokiBackend extends AbstractBackend
         }
     }
 
-    public function close(): void
-    {
-        if (count($this->streamBuffer) > 0) {
-            $this->flushAndSendStreamBuffer();
-        }
-    }
-
     protected function flushAndSendStreamBuffer()
     {
+
         $streams = $this->streamBuffer;
 
         $this->streamBuffer = [];
 
         $this->client->send($streams);
+    }
+
+    public function close(): void
+    {
+        if ($this->closed) {
+            return;
+        }
+
+        $this->closed = true;
+
+        var_dump(floor(microtime(true) * 1000));
+        if (count($this->streamBuffer) > 0) {
+            $this->flushAndSendStreamBuffer();
+        }
+        var_dump(floor(microtime(true) * 1000));
+    }
+
+    public function __destruct()
+    {
+        $this->close();
     }
 }
