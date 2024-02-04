@@ -12,7 +12,8 @@ class LokiClientConfiguration
         public readonly string $user,
         public readonly string $token,
         public readonly string $url,
-        public readonly array $labels = []
+        public readonly array $labels = [],
+        public readonly bool $async = false
         // TODO: backup log file path
     ) {
         if (!empty($this->labels) && array_is_list($this->labels)) {

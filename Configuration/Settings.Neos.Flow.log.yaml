@@ -12,6 +12,7 @@ Neos:
                 user: "%env:LOKI_USER%"
                 token: "%env:LOKI_TOKEN%"
                 maxBufferSize: 150
+                async: true
                 labels:
                   target: systemLogger
           securityLogger:
@@ -23,6 +24,7 @@ Neos:
                 user: "%env:LOKI_USER%"
                 token: "%env:LOKI_TOKEN%"
                 maxBufferSize: 1
+                async: true
                 labels:
                   target: securityLogger
 #         sqlLogger:
