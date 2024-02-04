@@ -10,6 +10,9 @@ class LokiClient
 {
     protected GuzzleHttp\Client $client;
 
+    protected mixed $fallbackFileHandler = null;
+    protected string $senderName = "sendToLoki";
+
     public function __construct(protected LokiClientConfiguration $configuration)
     {
         $this->client = new GuzzleHttp\Client([
@@ -43,16 +46,37 @@ class LokiClient
 
     public function send(array $streams)
     {
-        $body = [
-            "streams" => $streams
-        ];
+        $senderName = $this->senderName;
+        $this->$senderName($streams);
+    }
 
+    protected function sendToLoki(array $streams)
+    {
         try {
             $this->client->post($this->configuration->url, [
-                GuzzleHttp\RequestOptions::JSON => $body
+                GuzzleHttp\RequestOptions::JSON => [
+                    "streams" => $streams
+                ]
             ]);
         } catch (\Throwable $th) {
-            // TODO: in case of error do not try any again and log streams to file instead
+            if ($this->configuration->fallbackFile && $this->fallbackFileHandler = \fopen($this->configuration->fallbackFile, "a")) {
+                $this->senderName = "sendToFallbackFile";
+                $this->sendToFallbackFile($streams);
+            } else {
+                $this->senderName = "sendToNull";
+            }
         }
+    }
+
+    protected function sendToFallbackFile(array $streams)
+    {
+        foreach ($streams as $stream) {
+            fwrite($this->fallbackFileHandler, json_encode($stream) . "\n");
+        }
+    }
+
+    protected function sendToNull()
+    {
+        // do nothing
     }
 }

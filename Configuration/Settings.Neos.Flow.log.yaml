@@ -12,6 +12,7 @@ Neos:
                 user: "%env:LOKI_USER%"
                 token: "%env:LOKI_TOKEN%"
                 maxBufferSize: 150
+                fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.jsonl"
                 connectTimeout: 0.2
                 readTimeout: 0.2
                 labels:
@@ -25,6 +26,7 @@ Neos:
                 user: "%env:LOKI_USER%"
                 token: "%env:LOKI_TOKEN%"
                 maxBufferSize: 150
+                fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.jsonl"
                 connectTimeout: 0.2
                 readTimeout: 0.2
                 labels:
@@ -38,6 +40,7 @@ Neos:
         #       user: "%env:LOKI_USER%"
         #       token: "%env:LOKI_TOKEN%"
         #       maxBufferSize: 150
+        #       fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.jsonl"
         #       connectTimeout: 0.1
         #       readTimeout: 0.1
         #       labels:
@@ -51,6 +54,7 @@ Neos:
         #       user: "%env:LOKI_USER%"
         #       token: "%env:LOKI_TOKEN%"
         #       maxBufferSize: 150
+        #       fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.jsonl"
         #       connectTimeout: 0.1
         #       readTimeout: 0.1
         #       labels:

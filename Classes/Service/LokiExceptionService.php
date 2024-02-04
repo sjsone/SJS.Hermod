@@ -24,6 +24,7 @@ class LokiExceptionService
             $this->configuration['connectTimeout'],
             $this->configuration['readTimeout'],
             $this->configuration['labels'],
+            $this->configuration['fallbackFile'],
         );
 
         $this->lokiClient = new LokiClient($lokiClientConfiguration);

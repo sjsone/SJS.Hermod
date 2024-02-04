@@ -59,9 +59,10 @@ class LokiBackend extends AbstractBackend
             $options['user'],
             $options['token'],
             $options['url'],
-            $options['connectTimeout'] ?? [],
-            $options['readTimeout'] ?? [],
-            $options['labels'] ?? []
+            $options['connectTimeout'] ?? 0.1,
+            $options['readTimeout'] ?? 0.1,
+            $options['labels'] ?? [],
+            $options['fallbackFile'] ?? null
         );
 
         $this->client = new LokiClient($lokiClientConfiguration);
@@ -125,11 +126,9 @@ class LokiBackend extends AbstractBackend
 
         $this->closed = true;
 
-        var_dump(floor(microtime(true) * 1000));
         if (count($this->streamBuffer) > 0) {
             $this->flushAndSendStreamBuffer();
         }
-        var_dump(floor(microtime(true) * 1000));
     }
 
     public function __destruct()

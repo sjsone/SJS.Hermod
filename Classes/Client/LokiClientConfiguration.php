@@ -15,7 +15,7 @@ class LokiClientConfiguration
         public readonly float $connectTimeout = 0.1,
         public readonly float $readTimeout = 0.1,
         public readonly array $labels = [],
-        // TODO: backup log file path
+        public readonly ?string $fallbackFile = null
     ) {
         if (!empty($this->labels) && array_is_list($this->labels)) {
             throw new \Exception("LokiClientConfiguration: labels MUST be an associative array");
