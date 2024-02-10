@@ -1,9 +1,6 @@
 <h1 align="center">
   <br>
   <a href="https://github.com/sjsone/SJS.Loki"><img src="https://raw.githubusercontent.com/sjsone/SJS.Loki/main/assets/logo.svg" alt="Loki" width="200"></a>
-  <br>
-  Loki
-  <br>
 </h1>
 
 <h4 align="center">Simple pre-configured logging and exception handling for Neos</h4>
