@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace SJS\Loki\Log\Backend;
+namespace SJS\Hermod\Log\Backend;
 
 use Neos\Flow\Log\Backend\AbstractBackend;
-use SJS\Loki\Client\LokiClient;
-use SJS\Loki\Client\LokiClientConfiguration;
+use SJS\Hermod\Client\LokiClient;
+use SJS\Hermod\Client\LokiClientConfiguration;
 
 class LokiBackend extends AbstractBackend
 {

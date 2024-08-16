@@ -5,7 +5,7 @@ Neos:
         'Neos\Flow\Log\PsrLoggerFactory':
           systemLogger:
             default:
-              class: SJS\Loki\Log\Backend\LokiBackend
+              class: SJS\Hermod\Log\Backend\LokiBackend
               options:
                 severityThreshold: "%LOG_DEBUG%"
                 url: "%env:LOKI_URI%"
@@ -19,7 +19,7 @@ Neos:
                   target: systemLogger
           securityLogger:
             default:
-              class: SJS\Loki\Log\Backend\LokiBackend
+              class: SJS\Hermod\Log\Backend\LokiBackend
               options:
                 severityThreshold: "%LOG_DEBUG%"
                 url: "%env:LOKI_URI%"
@@ -33,7 +33,7 @@ Neos:
                   target: securityLogger
         # sqlLogger:
         #   default:
-        #     class: SJS\Loki\Log\Backend\LokiBackend
+        #     class: SJS\Hermod\Log\Backend\LokiBackend
         #     options:
         #       severityThreshold: "%LOG_INFO%"
         #       url: "%env:LOKI_URI%"
@@ -47,7 +47,7 @@ Neos:
         #         target: sqlLogger
         # i18nLogger:
         #   default:
-        #     class: SJS\Loki\Log\Backend\LokiBackend
+        #     class: SJS\Hermod\Log\Backend\LokiBackend
         #     options:
         #       severityThreshold: "%LOG_INFO%"
         #       url: "%env:LOKI_URI%"

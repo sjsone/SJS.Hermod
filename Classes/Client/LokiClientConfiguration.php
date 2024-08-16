@@ -1,6 +1,6 @@
 <?php
 
-namespace SJS\Loki\Client;
+namespace SJS\Hermod\Client;
 
 use GuzzleHttp;
 use Neos\Flow\Annotations as Flow;

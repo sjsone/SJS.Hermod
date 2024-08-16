@@ -2,4 +2,4 @@ Neos:
   Flow:
     error:
       exceptionHandler:
-        className: SJS\Loki\Handler\DebugExceptionHandler
+        className: SJS\Hermod\Handler\DebugExceptionHandler

@@ -1,11 +1,11 @@
 <?php
-namespace SJS\Loki;
+namespace SJS\Hermod;
 
 use Neos\Flow\Core\Booting\Sequence;
 use Neos\Flow\Core\Booting\Step;
 use Neos\Flow\Core\Bootstrap;
 use Neos\Flow\Package\Package as BasePackage;
-use SJS\Loki\Service\LokiExceptionService;
+use SJS\Hermod\Service\LokiExceptionService;
 
 class Package extends BasePackage
 {

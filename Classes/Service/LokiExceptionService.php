@@ -1,10 +1,10 @@
 <?php
 
-namespace SJS\Loki\Service;
+namespace SJS\Hermod\Service;
 
 use Neos\Flow\Annotations as Flow;
-use SJS\Loki\Client\LokiClient;
-use SJS\Loki\Client\LokiClientConfiguration;
+use SJS\Hermod\Client\LokiClient;
+use SJS\Hermod\Client\LokiClientConfiguration;
 
 
 #[Flow\Scope("singleton")]

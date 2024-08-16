@@ -2,7 +2,7 @@ Neos:
   Flow:
     error:
       exceptionHandler:
-        className: SJS\Loki\Handler\ProductionExceptionHandler
+        className: SJS\Hermod\Handler\ProductionExceptionHandler
 
         defaultRenderingOptions:
           lokiIgnoreException: false

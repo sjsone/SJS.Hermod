@@ -1,11 +1,11 @@
 <?php
 
-namespace SJS\Loki\Handler;
+namespace SJS\Hermod\Handler;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Error\ProductionExceptionHandler as FlowProductionExceptionHandler;
 use Neos\Flow\ObjectManagement\ObjectManagerInterface;
-use SJS\Loki\Service\LokiExceptionService;
+use SJS\Hermod\Service\LokiExceptionService;
 use Neos\Flow\Core\Bootstrap;
 
 class ProductionExceptionHandler extends FlowProductionExceptionHandler

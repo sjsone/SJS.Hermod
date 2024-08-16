@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/sjsone/SJS.Loki"><img src="https://raw.githubusercontent.com/sjsone/SJS.Loki/main/assets/logo.svg" alt="Loki" width="420"></a>
+  <a href="https://github.com/sjsone/SJS.Hermod"><img src="https://raw.githubusercontent.com/sjsone/SJS.Hermod/main/assets/logo.svg" alt="Hermod" width="420"></a>
 </h1>
 
 <h4 align="center">Simple pre-configured logging and exception handling for Neos</h4>
@@ -18,7 +18,7 @@
 
 Just add these environment variables and you are good to go:
 
-- **`LOKI_URI`**: the URL to your Loki instance
+- **`LOKI_URI`**: the URL to your Hermod instance
 - **`LOKI_USER`**: Username
 - **`LOKI_TOKEN`**: Access Token
 
@@ -26,22 +26,22 @@ Just add these environment variables and you are good to go:
 
 A buffered logging backend.
 
-**Class:** `SJS\Loki\Log\Backend\LokiBackend`
+**Class:** `SJS\Hermod\Log\Backend\LokiBackend`
 
 ### Options
 
 | key               | type   | description                                                  |
 | ----------------- | ------ | ------------------------------------------------------------ |
 | severityThreshold | string |                                                              |
-| url               | string | url to your Loki instance. Port included                     |
+| url               | string | url to your Hermod instance. Port included                     |
 | user              | string | Username                                                     |
 | token             | string | Access token                                                 |
-| maxBufferSize     | number | How many logs should be buffered until they get sent to Loki |
+| maxBufferSize     | number | How many logs should be buffered until they get sent to Hermod |
 | labels            | array  | _optional_ key value pair of static labels                   |
 
 ### Example
 
-*`Configuration/Settings.Neos.Flow.yaml`*
+_`Configuration/Settings.Neos.Flow.yaml`_
 
 ```yaml
 Neos:
@@ -51,7 +51,7 @@ Neos:
         'Neos\Flow\Log\PsrLoggerFactory':
           systemLogger:
             default:
-              class: SJS\Loki\Log\Backend\LokiBackend
+              class: SJS\Hermod\Log\Backend\LokiBackend
               options:
                 severityThreshold: "%LOG_DEBUG%"
                 url: "%env:LOKI_URI%"
@@ -64,19 +64,19 @@ Neos:
 
 ## Exception Handling
 
-**Production Class**: `SJS\Loki\Handler\ProductionExceptionHandler`
+**Production Class**: `SJS\Hermod\Handler\ProductionExceptionHandler`
 
-**Debug Class**: `SJS\Loki\Handler\DebugExceptionHandler`
+**Debug Class**: `SJS\Hermod\Handler\DebugExceptionHandler`
 
 ### Options
 
-The exception handling is split into two parts. The Exception Handler uses the Exception Service to send the data to Loki.
+The exception handling is split into two parts. The Exception Handler uses the Exception Service to send the data to Hermod.
 
 #### Exception Service
 
 | key    | type   | description                                |
 | ------ | ------ | ------------------------------------------ |
-| url    | string | url to your Loki instance. Port included   |
+| url    | string | url to your Hermod instance. Port included   |
 | user   | string | Username                                   |
 | token  | string | Access token                               |
 | labels | array  | _optional_ key value pair of static labels |
@@ -89,11 +89,11 @@ The exception handling is split into two parts. The Exception Handler uses the E
 
 ### Example
 
-*`Configuration/Settings.SJS.Loki.yaml`*
+_`Configuration/Settings.SJS.Hermod.yaml`_
 
 ```yaml
 SJS:
-  Loki:
+  Hermod:
     exceptionService:
       url: "%env:LOKI_URI%"
       user: "%env:LOKI_USER%"
@@ -102,14 +102,14 @@ SJS:
         target: exception
 ```
 
-*`Configuration/Settings.Neos.Flow.yaml`*
+_`Configuration/Settings.Neos.Flow.yaml`_
 
 ```yaml
 Neos:
   Flow:
     error:
       exceptionHandler:
-        className: SJS\Loki\Handler\ProductionExceptionHandler
+        className: SJS\Hermod\Handler\ProductionExceptionHandler
 
         defaultRenderingOptions:
           lokiIgnoreException: false

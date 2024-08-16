@@ -1,5 +1,5 @@
 SJS:
-  Loki:
+  Hermod:
     exceptionService:
       url: "%env:LOKI_URI%"
       user: "%env:LOKI_USER%"

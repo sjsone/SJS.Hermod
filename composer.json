@@ -1,19 +1,19 @@
 {
     "description": "",
     "type": "neos-package",
-    "name": "sjs/loki",
+    "name": "sjs/hermod",
     "require": {
         "neos/flow": "^8.0",
         "guzzlehttp/guzzle": "^7.0"
     },
     "autoload": {
         "psr-4": {
-            "SJS\\Loki\\": "Classes/"
+            "SJS\\Hermod\\": "Classes/"
         }
     },
     "extra": {
         "neos": {
-            "package-key": "SJS.Loki"
+            "package-key": "SJS.Hermod"
         }
     }
 }
