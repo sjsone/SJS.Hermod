@@ -62,6 +62,10 @@ class LokiBackend extends AbstractBackend
             throw new Exception\WronglyConfiguredLabels("LokiBackend");
         }
 
+        if(!$options['user'] && !$options['token'] && !$options['url']) {
+            throw new Exception\MissingAllAuthenticationOptions("LokiBackend");
+        }
+
         $lokiClientConfiguration = new Configuration(
             $options['user'],
             $options['token'],
