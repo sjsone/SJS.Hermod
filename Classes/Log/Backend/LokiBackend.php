@@ -90,6 +90,16 @@ class LokiBackend extends AbstractBackend
             $labels['methodName'] = $methodName;
         }
 
+        if (isset($additionalData["labels"]) && is_iterable($additionalData["labels"])) {
+            foreach ($additionalData["labels"] as $key => $value) {
+                if(!$key || !is_string($key)) {
+                    continue;
+                }
+
+                $labels[$key] = (string) $value;
+            }
+        }
+
         $ipAddress = ($this->logIpAddress === true) ? str_pad(($_SERVER['REMOTE_ADDR'] ?? ''), 15) . ' ' : '';
         $severityLabel = $this->severityLabels[$severity] ?? 'UNKNOWN  ';
 
