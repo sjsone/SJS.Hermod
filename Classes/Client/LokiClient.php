@@ -61,6 +61,7 @@ class LokiClient
                 ]
             ]);
         } catch (\Throwable $th) {
+            // TODO: more configurable and extensible sender resolving and error handling
             if ($this->configuration->fallbackFile && $this->fallbackFileHandler = \fopen($this->configuration->fallbackFile, "a")) {
                 $this->senderName = "sendToFallbackFile";
                 $this->sendToFallbackFile($streams);
