@@ -1,13 +1,13 @@
 <?php
 
-namespace SJS\Hermod\Client;
+namespace SJS\Hermod\Client\LokiClient;
 
 use GuzzleHttp;
 use Neos\Flow\Annotations as Flow;
 use SJS\Hermod\Exception;
 
 
-class LokiClientConfiguration
+class Configuration
 {
     public function __construct(
         public readonly string $user,

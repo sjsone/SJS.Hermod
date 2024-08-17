@@ -4,7 +4,7 @@ namespace SJS\Hermod\Service;
 
 use Neos\Flow\Annotations as Flow;
 use SJS\Hermod\Client\LokiClient;
-use SJS\Hermod\Client\LokiClientConfiguration;
+use SJS\Hermod\Client\LokiClient\Configuration;
 
 
 #[Flow\Scope("singleton")]
@@ -17,7 +17,7 @@ class LokiExceptionService
 
     public function initializeObject()
     {
-        $lokiClientConfiguration = new LokiClientConfiguration(
+        $lokiClientConfiguration = new Configuration(
             $this->configuration['user'],
             $this->configuration['token'],
             $this->configuration['url'],

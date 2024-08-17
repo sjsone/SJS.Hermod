@@ -5,6 +5,7 @@ namespace SJS\Hermod\Client;
 use GuzzleHttp;
 use Neos\Flow\Annotations as Flow;
 use SJS\Hermod\Exception;
+use SJS\Hermod\Client\LokiClient\Configuration;
 
 
 class LokiClient
@@ -14,7 +15,7 @@ class LokiClient
     protected mixed $fallbackFileHandler = null;
     protected string $senderName = "sendToLoki";
 
-    public function __construct(protected LokiClientConfiguration $configuration)
+    public function __construct(protected Configuration $configuration)
     {
         $this->client = new GuzzleHttp\Client([
             GuzzleHttp\RequestOptions::AUTH => [

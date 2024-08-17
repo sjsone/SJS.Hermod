@@ -5,7 +5,7 @@ namespace SJS\Hermod\Log\Backend;
 
 use Neos\Flow\Log\Backend\AbstractBackend;
 use SJS\Hermod\Client\LokiClient;
-use SJS\Hermod\Client\LokiClientConfiguration;
+use SJS\Hermod\Client\LokiClient\Configuration;
 use SJS\Hermod\Exception;
 
 class LokiBackend extends AbstractBackend
@@ -56,7 +56,7 @@ class LokiBackend extends AbstractBackend
             throw new Exception\WronglyConfiguredLabels("LokiBackend");
         }
 
-        $lokiClientConfiguration = new LokiClientConfiguration(
+        $lokiClientConfiguration = new Configuration(
             $options['user'],
             $options['token'],
             $options['url'],
