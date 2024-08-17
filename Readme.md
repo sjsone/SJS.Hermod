@@ -5,7 +5,7 @@
 <h4 align="center">Simple pre-configured Grafana Loki logging and exception handling for Neos</h4>
 
 <p align="center">
-  <a href="">📦 Packagist</a> •
+  <a href="https://packagist.org/packages/sjs/hermod">📦 Packagist</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="#Functionality">Functionality</a>
 </p>
