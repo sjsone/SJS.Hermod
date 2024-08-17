@@ -5,7 +5,7 @@ SJS:
       user: "%env:LOKI_USER%"
       token: "%env:LOKI_TOKEN%"
       maxBufferSize: 150
-      fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.jsonl"
+      fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.exceptionService.jsonl"
       connectTimeout: 0.2
       readTimeout: 0.2
       labels:

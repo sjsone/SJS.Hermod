@@ -32,12 +32,20 @@ class LokiCommandController extends CommandController
         return new LokiClient($lokiClientConfiguration);
     }
 
+    /**
+     * Sends the streams in a fallback file back to Loki
+     *
+     * Each stream in the file gets read, send to Loki and deleted.
+     * The --configuration-path is the path to the client configuration. For Example:
+     *     --configuration-path "Neos.Flow.log.psr3.'Neos\Flow\Log\PsrLoggerFactory'.systemLogger.default.options"
+     *     --configuration-path "SJS.Hermod.exceptionService"
+     *
+     * @param string $configurationPath to the client configuration
+     */
     public function sendFallbackCommand(string $configurationPath = "")
     {
         $configuration = $this->configurationManager->getConfiguration("Settings", $configurationPath);
         if(!$configuration || !is_array($configuration)) {
-            \Neos\Flow\var_dump($configuration);
-            die();
             $this->output("<error>Could not read configuration</error>\n");
             return;
         }

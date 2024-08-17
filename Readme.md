@@ -29,14 +29,15 @@ A buffered logging backend.
 
 ### Options
 
-| key               | type   | description                                                  |
-| ----------------- | ------ | ------------------------------------------------------------ |
-| severityThreshold | string |                                                              |
-| url               | string | url to your Loki instance. Port included                     |
-| user              | string | Username                                                     |
-| token             | string | Access token                                                 |
-| maxBufferSize     | number | How many logs should be buffered until they get sent to Hermod |
-| labels            | array  | _optional_ key value pair of static labels                   |
+| key               | type   | description                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------- |
+| severityThreshold | string |                                                                       |
+| url               | string | url to your Loki instance. Port included                              |
+| user              | string | Username                                                              |
+| token             | string | Access token                                                          |
+| maxBufferSize     | number | How many logs should be buffered until they get sent to Hermod        |
+| labels            | array  | _optional_ key value pair of static labels                            |
+| fallbackFile      | string | _optional_ Path to a file to log the streams if Loki is not reachable |
 
 ### Example
 
@@ -73,12 +74,13 @@ The exception handling is split into two parts. The Exception Handler uses the E
 
 #### Exception Service
 
-| key    | type   | description                                |
-| ------ | ------ | ------------------------------------------ |
-| url    | string | url to your Hermod instance. Port included   |
-| user   | string | Username                                   |
-| token  | string | Access token                               |
-| labels | array  | _optional_ key value pair of static labels |
+| key               | type   | description                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------- |
+| url               | string | url to your Hermod instance. Port included                            |
+| user              | string | Username                                                              |
+| token             | string | Access token                                                          |
+| labels            | array  | _optional_ key value pair of static labels                            |
+| fallbackFile      | string | _optional_ Path to a file to log the streams if Loki is not reachable |
 
 #### Exception Handler
 
@@ -97,6 +99,7 @@ SJS:
       url: "%env:LOKI_URI%"
       user: "%env:LOKI_USER%"
       token: "%env:LOKI_TOKEN%"
+      fallbackFile: "%FLOW_PATH_DATA%Logs/loki.log.exceptionService.jsonl"
       labels:
         target: exception
 ```
