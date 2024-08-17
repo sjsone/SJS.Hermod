@@ -2,6 +2,7 @@
     "description": "",
     "type": "neos-package",
     "name": "sjs/hermod",
+    "license": "AGPL-3.0-or-later",
     "require": {
         "neos/flow": "^8.0",
         "guzzlehttp/guzzle": "^7.0"
