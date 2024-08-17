@@ -37,7 +37,7 @@ A buffered logging backend.
 | url               | string |            | url to your Loki instance. Port included                              |
 | user              | string |            | Username                                                              |
 | token             | string |            | Access token                                                          |
-| maxBufferSize     | number |            | How many logs should be buffered until they get sent to Hermod        |
+| maxBufferSize     | number |            | How many logs should be buffered until they get sent to Loki        |
 | labels            | array  | _optional_ | key value pair of static labels                                       |
 | fallbackFile      | string | _optional_ |  Path to a file to log the streams if Loki is not reachable           |
 
