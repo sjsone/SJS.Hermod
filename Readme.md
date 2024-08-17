@@ -18,7 +18,7 @@
 
 Just add these environment variables and you are good to go:
 
-- **`LOKI_URI`**: the URL to your Hermod instance
+- **`LOKI_URI`**: the URL to your Loki instance
 - **`LOKI_USER`**: Username
 - **`LOKI_TOKEN`**: Access Token
 
@@ -33,7 +33,7 @@ A buffered logging backend.
 | key               | type   | description                                                  |
 | ----------------- | ------ | ------------------------------------------------------------ |
 | severityThreshold | string |                                                              |
-| url               | string | url to your Hermod instance. Port included                     |
+| url               | string | url to your Loki instance. Port included                     |
 | user              | string | Username                                                     |
 | token             | string | Access token                                                 |
 | maxBufferSize     | number | How many logs should be buffered until they get sent to Hermod |
