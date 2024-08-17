@@ -2,7 +2,7 @@
   Hermod
 </h1>
 
-<h4 align="center">Simple pre-configured logging and exception handling for Neos</h4>
+<h4 align="center">Simple pre-configured Grafana Loki logging and exception handling for Neos</h4>
 
 <p align="center">
   <a href="">📦 Packagist</a> •
