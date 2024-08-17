@@ -15,6 +15,9 @@
 
 ## Quick Start
 
+> [!INFO]  
+> This package pre-configures the Neos Flow `systemLogger` and `securityLogger` as well as the `exceptionHandler`.
+
 Just add these environment variables and you are good to go:
 
 - **`LOKI_URI`**: the URL to your Loki instance
