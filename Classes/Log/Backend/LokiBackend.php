@@ -112,6 +112,7 @@ class LokiBackend extends AbstractBackend
             $labels['methodName'] = $methodName;
         }
 
+        // TODO: introduce "ContextProcessors" to create labels from instead of hardcoding them
         if (isset($additionalData["labels"]) && is_iterable($additionalData["labels"])) {
             foreach ($additionalData["labels"] as $key => $value) {
                 if(!$key || !is_string($key)) {
@@ -128,7 +129,7 @@ class LokiBackend extends AbstractBackend
         $values = [
             [
                 floor(microtime(true) * 1000) . $this->getNextPseudoNanoSeconds(),
-                $ipAddress . $severityLabel . " " . $message . ($additionalData ? json_encode($additionalData) : "")
+                $ipAddress . $severityLabel . " " . $message
             ]
         ];
 
