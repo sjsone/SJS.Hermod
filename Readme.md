@@ -10,12 +10,9 @@
   <a href="#Functionality">Functionality</a>
 </p>
 
-> [!WARNING]  
-> 🚧 This package is still WIP 🚧
-
 ## Quick Start
 
-> [!INFO]  
+> [!IMPORTANT]  
 > This package pre-configures the Neos Flow `systemLogger` and `securityLogger` as well as the `exceptionHandler`.
 
 Just add these environment variables and you are good to go:
