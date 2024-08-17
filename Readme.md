@@ -6,14 +6,14 @@
 
 <p align="center">
   <a href="">📦 Packagist</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="#quick-start">Quick Start</a> •
   <a href="#Functionality">Functionality</a>
 </p>
 
 > [!WARNING]  
 > 🚧 This package is still WIP 🚧
 
-## How To Use
+## Quick Start
 
 Just add these environment variables and you are good to go:
 
@@ -21,13 +21,15 @@ Just add these environment variables and you are good to go:
 - **`LOKI_USER`**: Username
 - **`LOKI_TOKEN`**: Access Token
 
-## Logging Backend
+## Functionality
+
+### Logging Backend
 
 A buffered logging backend.
 
 **Class:** `SJS\Hermod\Log\Backend\LokiBackend`
 
-### Options
+#### Options
 
 | key               | type   | description                                                           |
 | ----------------- | ------ | --------------------------------------------------------------------- |
@@ -39,7 +41,7 @@ A buffered logging backend.
 | labels            | array  | _optional_ key value pair of static labels                            |
 | fallbackFile      | string | _optional_ Path to a file to log the streams if Loki is not reachable |
 
-### Example
+#### Example
 
 _`Configuration/Settings.Neos.Flow.yaml`_
 
@@ -62,17 +64,17 @@ Neos:
                   target: systemLogger
 ```
 
-## Exception Handling
+### Exception Handling
 
 **Production Class**: `SJS\Hermod\Handler\ProductionExceptionHandler`
 
 **Debug Class**: `SJS\Hermod\Handler\DebugExceptionHandler`
 
-### Options
+#### Options
 
 The exception handling is split into two parts. The Exception Handler uses the Exception Service to send the data to Hermod.
 
-#### Exception Service
+##### Exception Service
 
 | key               | type   | description                                                           |
 | ----------------- | ------ | --------------------------------------------------------------------- |
@@ -82,13 +84,13 @@ The exception handling is split into two parts. The Exception Handler uses the E
 | labels            | array  | _optional_ key value pair of static labels                            |
 | fallbackFile      | string | _optional_ Path to a file to log the streams if Loki is not reachable |
 
-#### Exception Handler
+##### Exception Handler
 
 | key                 | type | description                                 |
 | ------------------- | ---- | ------------------------------------------- |
 | lokiIgnoreException | bool | _optional_ Should the exception be ignored. |
 
-### Example
+#### Example
 
 _`Configuration/Settings.SJS.Hermod.yaml`_
 
