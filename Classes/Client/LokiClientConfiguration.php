@@ -4,6 +4,7 @@ namespace SJS\Hermod\Client;
 
 use GuzzleHttp;
 use Neos\Flow\Annotations as Flow;
+use SJS\Hermod\Exception;
 
 
 class LokiClientConfiguration
@@ -18,7 +19,7 @@ class LokiClientConfiguration
         public readonly ?string $fallbackFile = null
     ) {
         if (!empty($this->labels) && array_is_list($this->labels)) {
-            throw new \Exception("LokiClientConfiguration: labels MUST be an associative array");
+            throw new Exception\WronglyConfiguredLabels("LokiClientConfiguration");
         }
     }
 }

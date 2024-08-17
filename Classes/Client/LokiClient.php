@@ -4,6 +4,7 @@ namespace SJS\Hermod\Client;
 
 use GuzzleHttp;
 use Neos\Flow\Annotations as Flow;
+use SJS\Hermod\Exception;
 
 
 class LokiClient
@@ -32,7 +33,7 @@ class LokiClient
         if ($withLabels) {
             foreach ($withLabels as $label => $value) {
                 if (!is_string($value) && !is_numeric($value)) {
-                    throw new \Exception("LokiClient: could not build stream due to value of '$label'");
+                    throw new Exception\InvalidLabelValue("LokiClient", $label);
                 }
                 $labels[$label] = $value;
             }

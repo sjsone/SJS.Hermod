@@ -6,6 +6,7 @@ namespace SJS\Hermod\Log\Backend;
 use Neos\Flow\Log\Backend\AbstractBackend;
 use SJS\Hermod\Client\LokiClient;
 use SJS\Hermod\Client\LokiClientConfiguration;
+use SJS\Hermod\Exception;
 
 class LokiBackend extends AbstractBackend
 {
@@ -52,7 +53,7 @@ class LokiBackend extends AbstractBackend
         }
 
         if (isset($options['labels']) && !is_array($options['labels'])) {
-            throw new \Exception("LokiBackend: if labels are set, they MUST be an array");
+            throw new Exception\WronglyConfiguredLabels("LokiBackend");
         }
 
         $lokiClientConfiguration = new LokiClientConfiguration(
