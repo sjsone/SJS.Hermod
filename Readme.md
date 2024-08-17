@@ -1,6 +1,5 @@
 <h1 align="center">
-  <br>
-  <a href="https://github.com/sjsone/SJS.Hermod"><img src="https://raw.githubusercontent.com/sjsone/SJS.Hermod/main/assets/logo.svg" alt="Hermod" width="420"></a>
+  Hermod
 </h1>
 
 <h4 align="center">Simple pre-configured logging and exception handling for Neos</h4>
