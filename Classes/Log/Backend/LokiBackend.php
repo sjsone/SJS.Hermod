@@ -19,6 +19,10 @@ class LokiBackend extends AbstractBackend
 
     protected int $maxBufferSize = 150;
 
+    protected int $pseudoNanoSecondCounter = 0;
+    protected int $pseudoNanoSecondPadLength = 6;
+    protected int $pseudoNanoSecondMaxSize;
+
     protected array $severityLabels = [
         LOG_EMERG => 'EMERGENCY',
         LOG_ALERT => 'ALERT    ',
@@ -40,6 +44,8 @@ class LokiBackend extends AbstractBackend
      */
     public function __construct(array $options = [])
     {
+        $this->pseudoNanoSecondMaxSize = (int) pow(10, $this->pseudoNanoSecondPadLength);
+
         $this->severityThreshold = $options['severityThreshold'];
 
         if (isset($options['maxBufferSize'])) {
@@ -74,6 +80,18 @@ class LokiBackend extends AbstractBackend
         // stub
     }
 
+    protected function getNextPseudoNanoSeconds(): string
+    {
+        $pseudoNanoSeconds = str_pad((string) $this->pseudoNanoSecondCounter, $this->pseudoNanoSecondPadLength, "0", STR_PAD_LEFT);
+        
+        $this->pseudoNanoSecondCounter++;
+        if ($this->pseudoNanoSecondCounter >= $this->pseudoNanoSecondMaxSize) {
+            $this->pseudoNanoSecondCounter = 0;
+        }
+
+        return $pseudoNanoSeconds;
+    }
+
     public function append(string $message, int $severity = LOG_INFO, $additionalData = null, string $packageKey = null, string $className = null, string $methodName = null): void
     {
         $labels = [
@@ -105,7 +123,7 @@ class LokiBackend extends AbstractBackend
 
         $values = [
             [
-                floor(microtime(true) * 1000) . "000000",
+                floor(microtime(true) * 1000) . $this->getNextPseudoNanoSeconds(),
                 $ipAddress . $severityLabel . " " . $message . ($additionalData ? json_encode($additionalData) : "")
             ]
         ];
@@ -127,6 +145,8 @@ class LokiBackend extends AbstractBackend
         $this->streamBuffer = [];
 
         $this->client->send($streams);
+
+        $this->pseudoNanoSecondCounter = 0;
     }
 
     public function close(): void
