@@ -25,6 +25,10 @@ class LokiClient
             GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => $configuration->connectTimeout,
             GuzzleHttp\RequestOptions::READ_TIMEOUT => $configuration->readTimeout,
         ]);
+
+        if($this->configuration->fallbackFile) {
+            $this->fallbackFileHandler = \fopen($this->configuration->fallbackFile, "a");
+        }
     }
 
     public function buildStream(array $values, array $withLabels = null): array
